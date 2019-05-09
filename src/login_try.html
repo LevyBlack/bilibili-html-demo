@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <title>Login</title>
+    <style>
+      *{
+        font-family: "montserrat",sans-serif;
+      }
+      body{
+        margin: 0;
+        padding: 0;
+        background: #333;
+      }
+/*
+一般对象包括： position top left hight
+              backgroud-image linear-gradient: deg角度 颜色左，颜色右
+              transition 0.4s 移动速度 应该还有其他
+              translate 应该是左上角对象位移
+*/
+  .login-box{
+        position:absolute;
+        top: inherit;
+        left: -100%;
+        width: 100%;
+        height: 100vh;
+        background-image: linear-gradient(
+        45deg,
+        #9fbaa8,
+        #31354c
+          );
+        transition: 0.4s;
+      }
+
+  .login-form{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color:white;
+    text-align: center;
+  }
+
+  .login-form h1{
+    font-weight:400;
+    margin-top: 0;
+  }
+
+
+  /*对于文本框：
+display box-sizing：
+padding 控制单元格宽度；
+color 字体颜色；
+margin 分开不重叠；
+border-radius 转化为圆角；
+
+  */
+  .txtb {
+    display: block;
+    box-sizing: border-box;
+    width: 240px;
+    background: #ffffff28;
+    border: 1px solid white;
+    padding: 10px 20px;
+    color: white;
+    outline: none;
+    margin: 10px 0;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .login-btn {
+    width: 240px;
+    background: #2c3e50;
+    border: 0;
+    color: white;
+    padding: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  .hide-login-btn {
+    color: #000;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    cursor: pointer;
+    font-size: 30px;
+    opacity: 0.7;
+    transform: rotate(45deg); /*定义 2D 转换8 */
+  }
+/*
+关键在showed 方法，可以实现转换，切换
+*/
+  .show-login-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-10%, -50%);
+    color: white;
+    border: 2px solid;
+    padding: 10px;
+    cursor: pointer;
+  }
+  .showed {
+    left: 0;
+  }
+    </style>
+  </head>
+<!--
+1. div show-login-btn： 绝对位置，transform
+2. div loginBox: 1) "+"是叉号 hide login btn
+                2） form index.html class login-Form
+
+-->
+  <body>
+
+    <div class="show-login-btn">
+      -> Show Login Form
+    </div>
+
+<div class="login-box">
+  <div class="hide-login-btn">
+    +
+  </div>
+  <form action="index.html" method="POST" class="login-form">
+    <h1>Welcome</h1>
+    <input class="txtb" type="text" name="" placeholder="Username" />
+    <input class="txtb" type="password" name="" placeholder="Password" />
+    <input class="login-btn" type="submit" name="" value="Login" disabled />
+  </form>
+</div>
+
+<script type="text/javascript">
+function hasClass(element, classname) {
+  return element.className.match(new RegExp('(\\s|^)' + classname + '(\\s|$)'))
+}
+function addClass(element, classname) {
+  if (!this.hasClass(element, classname)) element.className += ' ' + classname
+}
+function removeClass(element, classname) {
+  if (hasClass(element, classname)) {
+    var reg = new RegExp('(\\s|^)' + classname + '(\\s|$)')
+    element.className = element.className.replace(reg, ' ')
+  }
+}
+function toggleClass(element, classname) {
+  if (hasClass(element, classname)) {
+    removeClass(element, classname)
+  } else {
+    addClass(element, classname)
+  }
+}
+/*
+Javascipt 将对象互相调用， showBtn 转换对象的情况，如果没有就添加，有就去掉。
+对象和类型名
+1. 获得以这些为名的对象的情况，是否或者否；
+2. 当触及那些键时候生成动作，click，然后调用函数；
+*/
+  var loginBox = document.getElementsByClassName('login-box')
+  var showBtn = document.getElementsByClassName('show-login-btn')
+  var hideBtn = document.getElementsByClassName('hide-login-btn')
+  showBtn[0].addEventListener('click',function(){
+    toggleClass(loginBox[0],'showed')
+  })
+  hideBtn[0].addEventListener('click',function(){
+    toggleClass(loginBox[0],"showed")
+  })
+</script>
+  </body>
+
+</html>
